@@ -1,5 +1,6 @@
 import {useEffect} from 'react';
 import "../styling/order.css";
+import arrow_forward_img from "../images/arrow_forward.svg";
 export default function Order(props) {
 
     const id = Math.floor(Math.random() * 1000000000);
@@ -36,11 +37,13 @@ export default function Order(props) {
                 <div className="order-btn-container">
 
                     {props.columnIndex > 0 && 
-                        <button className="order-status-button" onClick={SetorderToPreviousRow}>Back</button>
+                        <button className="order-status-button" onClick={SetorderToPreviousRow}><img className="order-prev-img" src={arrow_forward_img} alt="previous"></img></button>
                     }
                     <div className="order-status-button-spacer"></div>
                     {props.columnIndex < props.statuses.length-1 && 
-                        <button className="order-status-button" onClick={SetorderToNextRow}>Next</button>
+                        <button className="order-status-button" onClick={SetorderToNextRow}>
+                                <img src={arrow_forward_img} alt="next"></img>
+                            </button>
                     }
 
 

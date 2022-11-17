@@ -68,8 +68,29 @@
 .order-status-button {
     padding: 10px 20px;
     margin: 10px;
+    background-color: var(--order-header-color);
+    color: var(--order-header-text-color);
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+}
+
+.order-status-button:hover {
+    filter: brightness(110%);
+}
+
+.order-status-button:active {
+    filter: brightness(130%);
 }
 
 .order-status-button-spacer {
     flex-grow: 1;
+}
+
+.order-prev-img {
+    -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
