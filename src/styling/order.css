@@ -33,8 +33,9 @@
 .order-body {
     width: 100%;
     height: 100%;
-    background-color: black;
+    padding-bottom: 2px;
 }
+
 
 .order-item-container {
     display: flex;
@@ -54,4 +55,21 @@
     display: flex;
     justify-content: right;
     color: var(--order-item-count-color);
+}
+
+
+.order-btn-container {
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    flex-direction: row;
+}
+
+.order-status-button {
+    padding: 10px 20px;
+    margin: 10px;
+}
+
+.order-status-button-spacer {
+    flex-grow: 1;
 }

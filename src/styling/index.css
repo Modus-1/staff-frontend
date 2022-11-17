@@ -13,6 +13,7 @@ body {
   --column-header-outline: none;
   --column-background-color: white;
   --column-separator-width: 2px;
+  --column-separator-color: #9f9f9f;
   --column-header-text-color: #00aaee;
 
   --order-header-height: auto;
@@ -23,6 +24,7 @@ body {
   --order-header-text-color-table: rgba(255, 255, 255, 0.84);
   --order-item-gap: 10px;
   --order-item-count-color: #00aaee;
+  
   --sunset-orange: #FF5400;
 }
 
