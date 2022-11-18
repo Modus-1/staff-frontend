@@ -13,6 +13,12 @@
     outline: var(--column-header-outline);
     background-color: var(--column-header-color);
     color: var(--column-header-text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size: x-large;
+    font-weight: bolder;
 }
 
 .column-body {

@@ -1,7 +1,12 @@
-import {useEffect} from 'react';
+import {useEffect, useContext} from 'react';
 import "../styling/order.css";
 import arrow_forward_img from "../images/arrow_forward.svg";
+import deleteImg from "../images/delete.svg";
+import {OrderContext} from "../App";
+
 export default function Order(props) {
+    const deleteOrder = useContext(OrderContext).deleteOrder;
+    const changeStatus = useContext(OrderContext).changeStatus;
 
     const id = Math.floor(Math.random() * 1000000000);
     useEffect(() => {
@@ -11,11 +16,15 @@ export default function Order(props) {
     }, []);
 
     function SetorderToNextRow() {
-        props.changeStatus(props.order.id, props.statuses[props.columnIndex+1]);
+        changeStatus(props.order.id, props.statuses[props.columnIndex+1]);
     }
 
     function SetorderToPreviousRow() {
-        props.changeStatus(props.order.id, props.statuses[props.columnIndex-1]);
+        changeStatus(props.order.id, props.statuses[props.columnIndex-1]);
+    }
+
+    function deleteOrderFromList() {
+        deleteOrder(props.order.id);
     }
 
     return (
@@ -37,12 +46,19 @@ export default function Order(props) {
                 <div className="order-btn-container">
 
                     {props.columnIndex > 0 && 
-                        <button className="order-status-button" onClick={SetorderToPreviousRow}><img className="order-prev-img" src={arrow_forward_img} alt="previous"></img></button>
+                        <button className="order-status-button btn-main" onClick={SetorderToPreviousRow}><img className="order-prev-img" src={arrow_forward_img} alt="previous"></img></button>
                     }
+
                     <div className="order-status-button-spacer"></div>
                     {props.columnIndex < props.statuses.length-1 && 
-                        <button className="order-status-button" onClick={SetorderToNextRow}>
+                        <button className="order-status-button btn-main" onClick={SetorderToNextRow}>
                                 <img src={arrow_forward_img} alt="next"></img>
+                            </button>
+                    }
+
+                    {props.columnIndex === props.statuses.length-1 && 
+                        <button className="order-status-button btn-delete" onClick={deleteOrderFromList}>
+                                <img src={deleteImg} alt="Delete"></img>
                             </button>
                     }
 

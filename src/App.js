@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Column from './components/column';
 import './styling/App.css';
+
+export const OrderContext = React.createContext();
 
 function App() {
 
@@ -37,6 +39,11 @@ function App() {
     setOrders(newOrders);
   }
 
+  function deleteOrder(id) {
+    const newOrders = orders.filter(order => order.id !== id);
+    setOrders(newOrders);
+  }
+
   function getRandomColor() {
     
     var h = Math.floor(Math.random() * 360);
@@ -59,11 +66,13 @@ function App() {
 
   return (
     <div className="App">
+      <OrderContext.Provider value={{ changeStatus, deleteOrder }}>
         <div className='columns-container'>
           {columns.map(column => 
-            <Column index={column.statusIndex} statuses={statuses} key={column.status} text={column.status} orders={column.orders} changeStatus={changeStatus} />
+            <Column index={column.statusIndex} statuses={statuses} key={column.status} text={column.status} orders={column.orders}/>
           )}
         </div>
+      </OrderContext.Provider>
     </div>
   );
 }

@@ -6,10 +6,10 @@ export default function Column(props) {
   return (
     <div className="column-container">
         <div className="column-header" >
-            <h1>{props.text}</h1> 
+            {props.text}
         </div>
         <div className="column-body">
-            {props.orders.map((order) => { return <Order statuses={props.statuses} columnIndex={props.index} key={order.orderNumber} changeStatus={props.changeStatus} order={order}/> })}
+            {props.orders.map((order) => { return <Order statuses={props.statuses} columnIndex={props.index} key={order.orderNumber} order={order}/> })}
         </div>
     </div>
   );
