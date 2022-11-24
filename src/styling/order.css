@@ -1,0 +1,96 @@
+.order-container {
+    display: flex;
+    width: calc(100% - 2 * var(--order-card-gap-x));
+    height: fit-content;
+    flex-direction: column;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 2px 3px -2px rgba(0, 0, 0, 0.7);
+}
+
+.order-header span {
+    font-weight: bold;
+    font-size: 13pt;
+    margin: 5px;
+}
+
+.order-table-text {
+    flex-grow: 1;
+    display: flex;
+    justify-content: right;
+    color: var(--order-header-text-color-table);
+    text-transform: uppercase;
+}
+
+.order-header {
+    height: var(--order-header-height);
+    background-color: var(--order-header-color);
+    color: var(--order-header-text-color);
+    padding: 4px;
+    display: flex;
+}
+
+.order-body {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 2px;
+}
+
+
+.order-item-container {
+    display: flex;
+    width: calc(100% - 2 * var(--order-item-gap));
+    height: fit-content;
+    flex-direction: row;
+    margin-inline: var(--order-item-gap);
+    border-bottom: 1px solid rgba(0, 0, 100, 0.1);
+}
+.order-item-name {
+    justify-content: left;
+    display: flex;
+}
+
+.order-item-count {
+    flex-grow: 1;
+    display: flex;
+    justify-content: right;
+    color: var(--order-item-count-color);
+}
+
+
+.order-btn-container {
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    flex-direction: row;
+}
+
+.order-status-button {
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: var(--order-header-color);
+    color: var(--order-header-text-color);
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+}
+
+.order-status-button:hover {
+    filter: brightness(110%);
+}
+
+.order-status-button:active {
+    filter: brightness(130%);
+}
+
+.order-status-button-spacer {
+    flex-grow: 1;
+}
+
+.order-prev-img {
+    -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
