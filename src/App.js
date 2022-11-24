@@ -132,33 +132,31 @@ function App() {
       switch (order.status) {
         case "New":
           newOrders.push(order);
+          break;
         case "In Progress":
           newOrders.push(order);
+          break;
         default:
           doneOrders.push(order);
       }
     });
 
     newOrders.sort(
-      (a, b) => new Date(b.dates[b.status]) - new Date(a.dates[a.status])
+      (a, b) => new Date(a.dates[a.status]) - new Date(b.dates[b.status])
     );
     inProgressOrders.sort(
-      (a, b) => new Date(b.dates[b.status]) - new Date(a.dates[a.status])
+      (b, a) => new Date(a.dates[a.status]) - new Date(b.dates[b.status])
     );
     doneOrders.sort(
-      (a, b) => new Date(b.dates[b.status]) - new Date(a.dates[a.status])
+      (a, b) => new Date(a.dates[a.status]) - new Date(b.dates[b.status])
     );
 
     allOrders = [
       ...allOrders,
-      ...newOrders,
+      ...newOrders.reverse(),
       ...inProgressOrders,
       ...doneOrders,
     ];
-
-    // allOrders += newOrders;
-    // allOrders += inProgressOrders;
-    // allOrders += doneOrders;
 
     return allOrders;
   }
