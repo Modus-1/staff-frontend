@@ -102,7 +102,7 @@ function App() {
   function filterColumns() {
     let tempColumns = [];
     statuses.map((status, index) => {
-      // console.log(typeof orders);
+      //console.log(typeof orders);
       const filteredOrders = orders.filter((order) => order.status === status);
       tempColumns.push({
         statusIndex: index,
@@ -114,83 +114,95 @@ function App() {
   }
 
   // function sortOrders(orderList) {
-  //   return orderList.sort(
-  //     (a, b) =>
+  //   console.log(typeof orderList);
+  //   orderList.sort(function (a, b) {
+  //     return (
   //       statuses.indexOf(b.status) - statuses.indexOf(a.status) ||
-  //       new Date(b.dates[b.status]) - new Date(a.dates[a.status])
-  //   );
+  //       new Date(b.dates[statuses.indexOf(b.status)]) -
+  //         new Date(a.dates[statuses.indexOf(a.status)])
+  //     );
+  //   });
   // }
 
   function sortOrders(orderList) {
-    let allOrders = [];
-    let newOrders = [];
-    let inProgressOrders = [];
-    let doneOrders = [];
-
-    orderList.forEach(function (order) {
-      switch (order.status) {
-        case "New":
-          newOrders.push(order);
-          break;
-        case "In progress":
-          inProgressOrders.push(order);
-          break;
-        case "Done":
-          doneOrders.push(order);
-          break;
-        default:
-          break;
-      }
-    });
-
-    console.log("newOrdersBeforeSort");
-    console.log(newOrders);
-    console.log("inProgressOrdersBeforeSort");
-    console.log(inProgressOrders);
-    console.log("doneOrdersBeforeSort");
-    console.log(doneOrders);
-
-    newOrders.sort(function (a, b) {
-      return (
+    return orderList.sort(
+      (a, b) =>
+        statuses.indexOf(b.status) - statuses.indexOf(a.status) ||
         new Date(a.dates[statuses.indexOf(a.status)]) -
-        new Date(b.dates[statuses.indexOf(b.status)])
-      );
-    });
-    inProgressOrders.sort(function (a, b) {
-      return (
-        new Date(a.dates[statuses.indexOf(a.status)]) -
-        new Date(b.dates[statuses.indexOf(b.status)])
-      );
-    });
-    doneOrders.sort(function (a, b) {
-      return (
-        new Date(a.dates[statuses.indexOf(a.status)]) -
-        new Date(b.dates[statuses.indexOf(b.status)])
-      );
-    });
-
-    // console.log(
-    //   new Date(
-    //     inProgressOrders[0].dates[statuses.indexOf(inProgressOrders[0].status)]
-    //   ).getTime()
-    // );
-
-    console.log("newOrdersAfterSort");
-    console.log(newOrders);
-    console.log("inProgressOrdersAfterSort");
-    console.log(inProgressOrders);
-    console.log("doneOrdersAfterSort");
-    console.log(doneOrders);
-
-    allOrders = [
-      ...allOrders,
-      ...newOrders,
-      ...inProgressOrders,
-      ...doneOrders,
-    ];
-
-    return allOrders;
+          new Date(b.dates[statuses.indexOf(b.status)])
+    );
   }
+
+  // function sortOrders(orderList) {
+  //   let allOrders = [];
+  //   let newOrders = [];
+  //   let inProgressOrders = [];
+  //   let doneOrders = [];
+
+  //   orderList.forEach(function (order) {
+  //     switch (order.status) {
+  //       case "New":
+  //         newOrders.push(order);
+  //         break;
+  //       case "In progress":
+  //         inProgressOrders.push(order);
+  //         break;
+  //       case "Done":
+  //         doneOrders.push(order);
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //   });
+
+  //   console.log("newOrdersBeforeSort");
+  //   console.log(newOrders);
+  //   console.log("inProgressOrdersBeforeSort");
+  //   console.log(inProgressOrders);
+  //   console.log("doneOrdersBeforeSort");
+  //   console.log(doneOrders);
+
+  //   newOrders.sort(function (a, b) {
+  //     return (
+  //       new Date(a.dates[statuses.indexOf(a.status)]) -
+  //       new Date(b.dates[statuses.indexOf(b.status)])
+  //     );
+  //   });
+  //   inProgressOrders.sort(function (a, b) {
+  //     return (
+  //       new Date(a.dates[statuses.indexOf(a.status)]) -
+  //       new Date(b.dates[statuses.indexOf(b.status)])
+  //     );
+  //   });
+  //   doneOrders.sort(function (a, b) {
+  //     return (
+  //       new Date(a.dates[statuses.indexOf(a.status)]) -
+  //       new Date(b.dates[statuses.indexOf(b.status)])
+  //     );
+  //   });
+
+  //   // console.log(
+  //   //   new Date(
+  //   //     inProgressOrders[0].dates[statuses.indexOf(inProgressOrders[0].status)]
+  //   //   ).getTime()
+  //   // );
+
+  //   console.log("newOrdersAfterSort");
+  //   console.log(newOrders);
+  //   console.log("inProgressOrdersAfterSort");
+  //   console.log(inProgressOrders);
+  //   console.log("doneOrdersAfterSort");
+  //   console.log(doneOrders);
+
+  //   allOrders = [
+  //     ...allOrders,
+  //     ...newOrders,
+  //     ...inProgressOrders,
+  //     ...doneOrders,
+  //   ];
+
+  //   return allOrders;
+  // }
 
   return (
     <div className="App">
