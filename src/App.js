@@ -74,8 +74,10 @@ function App() {
         order.status = status;
         let index = statuses.indexOf(status);
         if (
-          (oldIndex === 0 && index === 1) ||
-          (oldIndex === 1 && index === 2)
+          (oldIndex === statuses.indexOf("New") &&
+            index === statuses.indexOf("In progress")) ||
+          (oldIndex === statuses.indexOf("In progress") &&
+            index === statuses.indexOf("Done"))
         ) {
           order.dates[index] = new Date();
         }
