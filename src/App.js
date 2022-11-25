@@ -60,14 +60,14 @@ function App() {
     setOrders(newOrders);
   }
 
+  let colorIndex = 0;
   function getRandomColor() {
-    
-    var h = Math.floor(Math.random() * 360);
+    var h = Math.floor(colorIndex * (360/5.5));
     var s = 100;
-    var l = 40;
+    var l = 35;
 
     var color = "hsl(" + h + "," + s + "%," + l + "%)";
-
+    colorIndex++;
     return color
   }
 
