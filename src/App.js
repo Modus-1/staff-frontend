@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import Column from './components/column';
-import './styling/App.css';
-import GetActiveOrders, {changeOrderStatus} from "./services/OrderServices"
+import { useEffect, useState } from "react";
+import Column from "./components/column";
+import "./styling/App.css";
+import GetActiveOrders, { changeOrderStatus } from "./services/OrderServices";
 
 function App() {
   const [orders, setOrders] = useState([]);
@@ -22,7 +22,7 @@ function App() {
   }
 
   function convertServiceDataToOrderData(orderlist) {
-    const orders = orderlist.map(order => {
+    const orders = orderlist.map((order) => {
       return {
         color: getRandomColor(),
         id: order.id,
@@ -32,8 +32,8 @@ function App() {
         orderNumber: order.id,
         creationTime: order.creationTime,
         items: order.items,
-        note: order.note
-      }
+        note: order.note,
+      };
     });
     return orders;
   }
@@ -57,7 +57,7 @@ function App() {
           order.dates[index] = new Date();
         }
 
-        const orderToUpdate = unfilteredOrders.find(order => order.id === id);
+        const orderToUpdate = unfilteredOrders.find((order) => order.id === id);
         orderToUpdate.status = statuses.indexOf(status);
         changeOrderStatus(orderToUpdate);
       }
@@ -70,18 +70,18 @@ function App() {
 
   let colorIndex = 0;
   function getRandomColor() {
-    var h = Math.floor(colorIndex * (360/5.5));
+    var h = Math.floor(colorIndex * (360 / 5.5));
     var s = 100;
     var l = 35;
 
     var color = "hsl(" + h + "," + s + "%," + l + "%)";
     colorIndex++;
-    return color
+    return color;
   }
 
   function filterColumns() {
     let tempColumns = [];
-    statuses.map((status, index) => {
+    statuses.forEach((status, index) => {
       const filteredOrders = orders.filter((order) => order.status === status);
       tempColumns.push({
         statusIndex: index,
