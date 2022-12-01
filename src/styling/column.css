@@ -4,7 +4,6 @@
     height: 100%;
     outline: var(--column-separator-width) var(--column-separator-color) solid;
     outline-offset: calc(var(--column-separator-width) / 2 * -1);
-    overflow-y: auto;
     flex-direction: column;
 }
 
@@ -23,5 +22,14 @@
     flex-direction: column;
     align-items: center;
     padding-top: var(--order-card-gap);
+    overflow-y: auto;
+    box-shadow: inset 0px 10px 20px -10px rgba(0, 0, 0, 0.5);
+}
+
+.order-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: var(--order-card-gap);
 }
