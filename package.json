@@ -14,8 +14,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "CI=false && react-scripts build",
+    "test": "react-scripts test --passWithNoTests",
+    "coverage": "react-scripts test --coverage .",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -35,5 +36,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "transformIgnorePatterns": ["<rootDir>/node_modules/(?!axios)/"],
+    "moduleNameMapper": {
+        "'^axios$'": "require.resolve('axios')"
+    }
   }
 }
