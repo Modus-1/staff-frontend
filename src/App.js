@@ -1,32 +1,37 @@
-import { useEffect, useState } from "react";
-import Column from "./components/column";
-import "./styling/App.css";
-import GetActiveOrders, { changeOrderStatus } from "./services/OrderServices";
+import { useEffect, useState } from 'react';
+import Column from './components/column';
+import './styling/App.css';
+import GetActiveOrders, {changeOrderStatus} from "./services/OrderServices"
+import getRandomColor from './services/ColorService';
+import GetDummyData from './services/DummyDataService';
+
+export const statuses = ["New", "In progress", "Done"];
 
 function App() {
   const [orders, setOrders] = useState([]);
   const [unfilteredOrders, setUnfilteredOrders] = useState([]);
   const [columns, setColumns] = useState([]);
 
-  const statuses = ["New", "In progress", "Done"];
-
   useEffect(() => {
-    init();
+
+    GetActiveOrders().then((result) => {
+      let orders = convertServiceDataToOrderData(result.data);
+      orders = refreshDates(orders);
+      setUnfilteredOrders(result.data);
+      sortOrders(orders);
+      setOrders(orders);
+    });
+
+    // if you want to use dummy data instead of the api, add REACT_APP_USE_DUMMY_DATA=true to the .env file
+    if (process.env.REACT_APP_USE_DUMMY_DATA === "true") {
+      setOrders(GetDummyData(10,30));
+    }
   }, []);
-
-  async function init() {
-    const result = await GetActiveOrders();
-    let orders = convertServiceDataToOrderData(result.data);
-    orders = refreshDates(orders);
-    setUnfilteredOrders(result.data);
-    sortOrders(orders);
-    setOrders(orders);
-  }
-
+  
   function convertServiceDataToOrderData(orderlist) {
     const orders = orderlist.map((order) => {
       return {
-        color: getRandomColor(),
+        color: getRandomColor(order.tableId),
         id: order.id,
         status: statuses[order.status],
         totalPrice: order.totalPrice,
@@ -81,18 +86,7 @@ function App() {
     const ordersToSet = sortOrders(newOrders);
     setOrders(ordersToSet);
   }
-
-  let colorIndex = 0;
-  function getRandomColor() {
-    var h = Math.floor(colorIndex * (360 / 5.5));
-    var s = 100;
-    var l = 35;
-
-    var color = "hsl(" + h + "," + s + "%," + l + "%)";
-    colorIndex++;
-    return color;
-  }
-
+  
   function filterColumns() {
     let tempColumns = [];
     statuses.forEach((status, index) => {
