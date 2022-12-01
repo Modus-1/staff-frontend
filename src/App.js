@@ -18,7 +18,6 @@ function App() {
     const result = await GetActiveOrders();
     let orders = convertServiceDataToOrderData(result.data);
     orders = refreshDates(orders);
-    console.log(orders);
     setUnfilteredOrders(result.data);
     sortOrders(orders);
     setOrders(orders);
@@ -80,7 +79,6 @@ function App() {
       return order;
     });
     const ordersToSet = sortOrders(newOrders);
-    console.log(ordersToSet);
     setOrders(ordersToSet);
   }
 
