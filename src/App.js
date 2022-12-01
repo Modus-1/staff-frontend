@@ -16,8 +16,11 @@ function App() {
 
   async function init() {
     const result = await GetActiveOrders();
-    const orders = convertServiceDataToOrderData(result.data);
+    let orders = convertServiceDataToOrderData(result.data);
+    orders = refreshDates(orders);
+    console.log(orders);
     setUnfilteredOrders(result.data);
+    sortOrders(orders);
     setOrders(orders);
   }
 
@@ -30,11 +33,23 @@ function App() {
         totalPrice: order.totalPrice,
         tableNumber: order.tableId,
         orderNumber: order.id,
-        creationTime: order.creationTime,
+        dates: [order.creationTime, null, null],
         items: order.items,
         note: order.note,
       };
     });
+    return orders;
+  }
+
+  function refreshDates(orderList) {
+    const orders = orderList.map((order) => {
+      const dates = localStorage.getItem(order.id);
+      if (dates != null) {
+        order.dates = JSON.parse(dates);
+      }
+      return order;
+    });
+
     return orders;
   }
 
@@ -55,6 +70,7 @@ function App() {
             index === statuses.indexOf("Done"))
         ) {
           order.dates[index] = new Date();
+          localStorage.setItem(order.id, JSON.stringify(order.dates));
         }
 
         const orderToUpdate = unfilteredOrders.find((order) => order.id === id);
