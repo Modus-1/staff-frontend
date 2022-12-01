@@ -1,5 +1,7 @@
+import React from "react";
+import "@testing-library/jest-dom";
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import App from '../App';
 
 test('Renders the columns New, In progress and Done', () => {
   render(<App />);
