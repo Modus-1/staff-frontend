@@ -24,7 +24,7 @@ function App() {
 
     // if you want to use dummy data instead of the api, add REACT_APP_USE_DUMMY_DATA=true to the .env file
     if (process.env.REACT_APP_USE_DUMMY_DATA === "true") {
-      setOrders(GetDummyData(10,30));
+      setOrders(GetDummyData(100,30));
     }
   }, []);
   
