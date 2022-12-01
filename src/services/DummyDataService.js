@@ -9,9 +9,9 @@ export default function GetDummyData(count, tableCount) {
 
     let orderlist = [];
     for (let i = 1; i < count + 1; i++) {
-        const statusnum = i % 3 === 0 ? 1 : i % 3 === 1 ? 2 : 3;
-        const tablenum = i % tableCount + 1;
-        const itemlist = i % 3 === 0 ? itemlist1 : i % 3 === 1 ? itemlist2 : itemlist3;
+        const statusnum = i % 3 + 1; //get a number between 1 and 3 based on the index
+        const tablenum = i % tableCount + 1; // get a number between 1 and tableCount based on the index
+        const itemlist = i % 3 === 0 ? itemlist1 : i % 3 === 1 ? itemlist2 : itemlist3; // get a different itemlist based on the index
 
         const order = { color:getRandomColor(tablenum), id: i, status: statuses[statusnum - 1], tableNumber: tablenum, orderNumber: i, items: itemlist };
         orderlist.push(order);
