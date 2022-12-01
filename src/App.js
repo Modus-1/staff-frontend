@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import Column from './components/column';
 import './styling/App.css';
 import GetActiveOrders, {changeOrderStatus} from "./services/OrderServices"
+import getRandomColor from './services/ColorService';
+import GetDummyData from './services/DummyDataService';
+
+export const statuses = ["New", "In progress", "Done"];
 
 function App() {
 
@@ -10,19 +14,25 @@ function App() {
   const [columns, setColumns] = useState([]);
 
 
-  const statuses = ["New", "In progress", "Done"];
 
 
   useEffect(() => {
-    init();
+
+    GetActiveOrders().then((result) => {
+      const orders = convertServiceDataToOrderData(result.data);
+      setUnfilteredOrders(result.data);
+      setOrders(orders);
+    });
+
+    // if you want to use dummy data instead of the api, add REACT_APP_USE_DUMMY_DATA=true to the .env file
+    if (process.env.REACT_APP_USE_DUMMY_DATA === "true") {
+      setOrders(GetDummyData(10,30));
+    }
+
   }, []);
 
-  async function init() {
-    const result = await GetActiveOrders();
-    const orders = convertServiceDataToOrderData(result.data);
-    setUnfilteredOrders(result.data);
-    setOrders(orders);
-  }
+
+  
 
   function convertServiceDataToOrderData(orderlist) {
     const orders = orderlist.map(order => {
@@ -60,16 +70,7 @@ function App() {
     setOrders(newOrders);
   }
 
-  let colorIndex = 0;
-  function getRandomColor() {
-    var h = Math.floor(colorIndex * (360/5.5));
-    var s = 100;
-    var l = 35;
-
-    var color = "hsl(" + h + "," + s + "%," + l + "%)";
-    colorIndex++;
-    return color
-  }
+  
 
   function filterColumns() {
     let tempColumns = [];
