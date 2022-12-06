@@ -23,7 +23,6 @@ function App() {
     };
 
     orderWebSocket.onUpdateOrder = (data) => {
-      console.log(data);
       const updatedOrder = convertServiceDataToOrderData([data])[0];
 
       setOrders((prev) => {
