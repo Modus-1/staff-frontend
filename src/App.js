@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
-import Column from './components/column';
-import './styling/App.css';
-import GetActiveOrders, {changeOrderStatus} from "./services/OrderServices"
-import getRandomColor from './services/ColorService';
-import GetDummyData from './services/DummyDataService';
+import { useEffect, useState } from "react";
+import Column from "./components/column";
+import "./styling/App.css";
+import GetActiveOrders, { changeOrderStatus, convertServiceDataToOrderData } from "./services/OrderServices";
+import getRandomColor from "./services/ColorService";
+import GetDummyData from "./services/DummyDataService";
+import OrderWebSocketService from "./services/OrderWebSocketService";
 
 export const statuses = ["New", "In progress", "Done"];
+
+const orderWebSocket = new OrderWebSocketService();
 
 function App() {
   const [orders, setOrders] = useState([]);
@@ -13,37 +16,42 @@ function App() {
   const [columns, setColumns] = useState([]);
 
   useEffect(() => {
+    orderWebSocket.onNewOrder = (data) => {
+      const order = convertServiceDataToOrderData([data])[0];
+      setOrders((prev) => [...prev, order]);
+      setUnfilteredOrders((prev) => [...prev, data]);
+    };
 
+    orderWebSocket.onUpdateOrder = (data) => {
+      const updatedOrder = convertServiceDataToOrderData([data])[0];
+
+      setOrders((prev) => {
+        const newOrders = prev.filter((order) => order.id !== updatedOrder.id);
+        return [...newOrders, updatedOrder];
+      });
+
+    };
+
+
+
+  }, []);
+
+
+
+  useEffect(() => {
     GetActiveOrders().then((result) => {
       let orders = convertServiceDataToOrderData(result.data);
       orders = refreshDates(orders);
       setUnfilteredOrders(result.data);
-      sortOrders(orders);
+      orders = sortOrders(orders);
       setOrders(orders);
     });
 
     // if you want to use dummy data instead of the api, add REACT_APP_USE_DUMMY_DATA=true to the .env file
     if (process.env.REACT_APP_USE_DUMMY_DATA === "true") {
-      setOrders(GetDummyData(100,30));
+      setOrders(GetDummyData(100, 30));
     }
   }, []);
-  
-  function convertServiceDataToOrderData(orderlist) {
-    const orders = orderlist.map((order) => {
-      return {
-        color: getRandomColor(order.tableId),
-        id: order.id,
-        status: statuses[order.status],
-        totalPrice: order.totalPrice,
-        tableNumber: order.tableId,
-        orderNumber: order.id,
-        dates: [order.creationTime, null, null],
-        items: order.items,
-        note: order.note,
-      };
-    });
-    return orders;
-  }
 
   function refreshDates(orderList) {
     const orders = orderList.map((order) => {
@@ -80,13 +88,14 @@ function App() {
         const orderToUpdate = unfilteredOrders.find((order) => order.id === id);
         orderToUpdate.status = statuses.indexOf(status);
         changeOrderStatus(orderToUpdate);
+        orderWebSocket.updateOrder(orderToUpdate);
       }
       return order;
     });
     const ordersToSet = sortOrders(newOrders);
     setOrders(ordersToSet);
   }
-  
+
   function filterColumns() {
     let tempColumns = [];
     statuses.forEach((status, index) => {

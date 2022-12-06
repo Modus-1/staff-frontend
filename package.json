@@ -39,9 +39,11 @@
     ]
   },
   "jest": {
-    "transformIgnorePatterns": ["<rootDir>/node_modules/(?!axios)/"],
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!axios)/"
+    ],
     "moduleNameMapper": {
-        "'^axios$'": "require.resolve('axios')"
+      "'^axios$'": "require.resolve('axios')"
     }
   }
 }
