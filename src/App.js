@@ -42,7 +42,6 @@ function App() {
   useEffect(() => {
     GetActiveOrders().then((result) => {
       let orders = convertServiceDataToOrderData(result.data);
-      orders = refreshDates(orders);
       setUnfilteredOrders(result.data);
       orders = sortOrders(orders);
       setOrders(orders);
@@ -54,45 +53,25 @@ function App() {
     }
   }, []);
 
-  function refreshDates(orderList) {
-    const orders = orderList.map((order) => {
-      const dates = localStorage.getItem(order.id);
-      if (dates != null) {
-        order.dates = JSON.parse(dates);
-      }
-      return order;
-    });
-
-    return orders;
-  }
-
   useEffect(() => {
     filterColumns();
   }, [orders]);
 
   function changeStatus(id, status) {
-    console.log("step1");
     const newOrders = orders.map((order) => {
       if (order.id === id) {
-        console.log("step2:");
-        console.log(order);
         let oldIndex = statuses.indexOf(order.status);
         order.status = status;
         let index = statuses.indexOf(status);
-        if (
-          // (oldIndex === statuses.indexOf("New") &&
-          //   index === statuses.indexOf("In progress")) ||
-          // (oldIndex === statuses.indexOf("In progress") &&
-          //   index === statuses.indexOf("Done"))
-          oldIndex < index
-        ) {
+        if (oldIndex < index) {
           order.dates[index] = new Date();
-          localStorage.setItem(order.id, JSON.stringify(order.dates));
         }
 
         const orderToUpdate = unfilteredOrders.find((order) => order.id === id);
         orderToUpdate.status = statuses.indexOf(status);
+        orderToUpdate.statusTimes[index] = order.dates[index];
         changeOrderStatus(orderToUpdate);
+        console.log(orderToUpdate);
         orderWebSocket.updateOrder(orderToUpdate);
       }
       return order;

@@ -16,7 +16,6 @@ export async function changeOrderStatus(order) {
   });
 }
 
-
 export function convertServiceDataToOrderData(orderlist) {
   const orders = orderlist.map((order) => {
     return {
@@ -26,7 +25,12 @@ export function convertServiceDataToOrderData(orderlist) {
       totalPrice: order.totalPrice,
       tableNumber: order.tableId,
       orderNumber: order.id,
-      dates: [order.creationTime, null, null],
+      dates: [
+        order.creationTime,
+        order.statusTimes[1],
+        order.statusTimes[2],
+        order.statusTimes[3],
+      ],
       items: order.items,
       note: order.note,
     };
