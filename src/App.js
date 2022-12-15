@@ -8,9 +8,10 @@ import GetActiveOrders, {
 import getRandomColor from "./services/ColorService";
 import GetDummyData from "./services/DummyDataService";
 import OrderWebSocketService from "./services/OrderWebSocketService";
-import KitchenPage from "./pages/kitchenPage";
+import KitchenPage from "./pages/KitchenPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import WaiterPage from "./pages/waiterPage";
+import WaiterPage from "./pages/WaiterPage";
+import LandingPage from "./pages/LandingPage";
 
 export const statuses = ["New", "In progress", "Ready", "Delivered"];
 
@@ -126,7 +127,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<div />} />
+          <Route path="/" element={<LandingPage />} />
           <Route
             path="/kitchen"
             element={
@@ -147,6 +148,7 @@ function App() {
               />
             }
           />
+          <Route path="/*" element={<LandingPage />} />
         </Routes>
       </BrowserRouter>
     </div>
