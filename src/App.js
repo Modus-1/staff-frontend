@@ -70,7 +70,6 @@ function App() {
         orderToUpdate.status = statuses.indexOf(status);
         orderToUpdate.statusTimes[index] = order.dates[index];
         changeOrderStatus(orderToUpdate);
-        console.log(orderToUpdate);
         orderWebSocket.updateOrder(orderToUpdate);
       }
       return order;

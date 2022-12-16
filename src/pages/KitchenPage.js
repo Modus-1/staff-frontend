@@ -12,7 +12,6 @@ export default function KitchenPage(props) {
           changeStatus={props.changeStatus}
         />
       ))}
-      console.log("hello world")
     </div>
   );
 }

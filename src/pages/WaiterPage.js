@@ -3,9 +3,7 @@ import Column from "../components/column";
 import Order from "../components/order";
 import "../styling/waiterPage.css";
 export default function WaiterPage(props) {
-  useEffect(() => {
-    console.log(props.columns);
-  }, [props.columns]);
+  useEffect(() => {}, [props.columns]);
 
   return (
     <div className="waiter-column-list">

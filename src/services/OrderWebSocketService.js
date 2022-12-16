@@ -26,7 +26,6 @@ export default class OrderWebSocketService {
   };
 
   updateOrder(order) {
-    console.log(order);
     this.updateOrderSocket.send(JSON.stringify(order));
   }
 }
