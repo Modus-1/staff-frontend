@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Column from "./components/column";
 import "./styling/App.css";
 import GetActiveOrders, {
   changeOrderStatus,
