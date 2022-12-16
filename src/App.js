@@ -30,7 +30,11 @@ function App() {
 
     orderWebSocket.onUpdateOrder = (data) => {
       const updatedOrder = convertServiceDataToOrderData([data])[0];
-
+      
+      setUnfilteredOrders((prev) => {
+        const newUnfilteredOrders = prev.filter((order) => order.id !== updatedOrder.id);
+        return [...newUnfilteredOrders, data];
+      });
       setOrders((prev) => {
         const newOrders = prev.filter((order) => order.id !== updatedOrder.id);
         return sortOrders([...newOrders, updatedOrder]);
