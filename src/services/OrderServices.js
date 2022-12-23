@@ -2,7 +2,7 @@ import axios from "axios";
 import getRandomColor from "./ColorService";
 import { statuses } from "../App";
 
-const API_URL = "https://localhost:7116/Order/";
+const API_URL = "http://localhost:9002/Order/";
 
 export default async function GetActiveOrders() {
   return await axios.get(API_URL + "active/all").then((response) => {
