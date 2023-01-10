@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  
+  /* Global css variables */
+  --column-header-height: auto;
+  --column-header-color: #e9e9e9;
+  --column-header-outline: none;
+  --column-background-color: white;
+  --column-separator-width: 2px;
+  --column-separator-color: #9f9f9f;
+  --column-header-text-color: #00aaee;
+
+  --order-header-height: auto;
+  --order-header-color: #00aaee;
+  --order-header-text-color: white;
+  --order-card-gap: 20px;
+  --order-card-gap-x: 10px;
+  --order-header-text-color-table: rgba(255, 255, 255, 0.84);
+  --order-item-gap: 10px;
+  --order-item-count-color: #00aaee;
+  
+  --sunset-orange: #FF5400;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+/* custom scrollbar */
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e9e9e9;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 6px 0px #0000000a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00000020;
+  /* box-shadow: #00000060 0px 0px 7px 0px; */
+  outline: none;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00000049;
+}
+
+::-webkit-scrollbar-button {
+  width: 5px;
+  height: 10px;
+}
+
