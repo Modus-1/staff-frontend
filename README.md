@@ -1,3 +1,6 @@
+![MODUS](https://img.shields.io/badge/MODUS-ASSUMPTION-orange?style=for-the-badge) ![React](https://img.shields.io/badge/React-38d3fa?style=for-the-badge&logo=react&logoColor=white&messageColor=white) ![node build status](https://img.shields.io/github/workflow/status/modus-1/staff-frontend/Node.js%20CI?label=Node%20build&logo=Node.js&logoColor=white&style=for-the-badge) ![sonarcloud status](https://img.shields.io/sonar/quality_gate/Modus-1_staff-frontend/main?logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge)<br /> [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=Modus-1_staff-frontend&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=Modus-1_staff-frontend) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Modus-1_staff-frontend&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Modus-1_staff-frontend) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Modus-1_staff-frontend&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Modus-1_staff-frontend) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Modus-1_staff-frontend&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Modus-1_staff-frontend) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Modus-1_staff-frontend&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Modus-1_staff-frontend)
+
+
 # Getting Started with the Staff Frontend
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -9,7 +12,7 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open [http://localhost:3001](http://localhost:3001) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
